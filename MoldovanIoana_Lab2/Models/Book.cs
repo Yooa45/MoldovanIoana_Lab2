@@ -9,17 +9,25 @@ namespace MoldovanIoana_Lab2.Models
     public class Book
     {
         public int ID { get; set; }
+        [Required, StringLength(150, MinimumLength = 3)]
         [Display(Name = "Book Title")]
         public string Title { get; set; }
-        public string Author { get; set; }
-        [Column(TypeName = "decimal(6, 2)")]
+        [RegularExpression(@"^[A-Z][a-z]+\s[A-Z][a-z]+$", ErrorMessage = "Numele autorului trebuie sa fie de forma 'Prenume Nume' "), Required, StringLength(50, MinimumLength = 3)]
+        //^ marcheaza inceputul sirului de caractere 
+        //[A-Z][a-z]+ prenumele -litera mare urmata de oricate litere mici
+        //\s spatiu
+        //[A-Z][a-z]+ numele- litera mare urmata de oricate litere mici
+        //$ marcheaza sfarsitul sirului de caractere
+        public int? AuthorID { get; set; }
+        public Author? Author { get; set; }
+        
         public decimal Price { get; set; }
 
         [DataType(DataType.Date)]
         public DateTime PublishingDate { get; set; }
-        public int PublisherID { get; set; }
-        public Publisher Publisher { get; set; }
-        public ICollection<BookCategory> BookCategories { get; set; }
+        public int? PublisherID { get; set; }
+        public Publisher? Publisher { get; set; }
+        public ICollection<BookCategory>? BookCategories { get; set; }
 
 
 

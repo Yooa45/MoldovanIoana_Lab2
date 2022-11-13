@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MoldovanIoana_Lab2.Data;
 
@@ -11,9 +12,10 @@ using MoldovanIoana_Lab2.Data;
 namespace MoldovanIoana_Lab2.Migrations
 {
     [DbContext(typeof(MoldovanIoana_Lab2Context))]
-    partial class MoldovanIoana_Lab2ContextModelSnapshot : ModelSnapshot
+    [Migration("20221111154851_BookCategoriesPageModel")]
+    partial class BookCategoriesPageModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,27 +23,6 @@ namespace MoldovanIoana_Lab2.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("MoldovanIoana_Lab2.Models.Author", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("Author_1");
-                });
 
             modelBuilder.Entity("MoldovanIoana_Lab2.Models.Book", b =>
                 {
@@ -51,15 +32,14 @@ namespace MoldovanIoana_Lab2.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
-                    b.Property<int?>("AuthorID")
+                    b.Property<string>("Author")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("int");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(6,2)");
 
-                    b.Property<int?>("PublisherID")
+                    b.Property<int>("PublisherID")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("PublishingDate")
@@ -67,12 +47,9 @@ namespace MoldovanIoana_Lab2.Migrations
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("AuthorID");
 
                     b.HasIndex("PublisherID");
 
@@ -138,17 +115,11 @@ namespace MoldovanIoana_Lab2.Migrations
 
             modelBuilder.Entity("MoldovanIoana_Lab2.Models.Book", b =>
                 {
-                    b.HasOne("MoldovanIoana_Lab2.Models.Author", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MoldovanIoana_Lab2.Models.Publisher", "Publisher")
                         .WithMany("Books")
-                        .HasForeignKey("PublisherID");
-
-                    b.Navigation("Author");
+                        .HasForeignKey("PublisherID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Publisher");
                 });
