@@ -24,12 +24,12 @@ namespace MoldovanIoana_Lab2.Pages.Authors
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Author_1 == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Author_1.FirstOrDefaultAsync(m => m.ID == id);
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
 
             if (author == null)
             {
@@ -44,16 +44,16 @@ namespace MoldovanIoana_Lab2.Pages.Authors
 
         public async Task<IActionResult> OnPostAsync(int? id)
         {
-            if (id == null || _context.Author_1 == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
-            var author = await _context.Author_1.FindAsync(id);
+            var author = await _context.Author.FindAsync(id);
 
             if (author != null)
             {
                 Author = author;
-                _context.Author_1.Remove(Author);
+                _context.Author.Remove(Author);
                 await _context.SaveChangesAsync();
             }
 

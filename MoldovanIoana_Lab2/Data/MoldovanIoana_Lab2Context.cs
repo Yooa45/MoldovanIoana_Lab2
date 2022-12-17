@@ -19,7 +19,7 @@ namespace MoldovanIoana_Lab2.Data
         public DbSet<MoldovanIoana_Lab2.Models.Publisher> Publisher { get; set; }
 
         public DbSet<MoldovanIoana_Lab2.Models.Category> Category { get; set; }
-        public IEnumerable<object> Author { get; internal set; }
-        public DbSet<MoldovanIoana_Lab2.Models.Author> Author_1 { get; set; }
+       
+        public DbSet<MoldovanIoana_Lab2.Models.Author> Author { get; set; }
     }
 }

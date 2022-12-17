@@ -4,7 +4,7 @@
 
 namespace MoldovanIoana_Lab2.Migrations
 {
-    public partial class Author_1 : Migration
+    public partial class Author : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,18 +18,18 @@ namespace MoldovanIoana_Lab2.Migrations
 
             migrationBuilder.RenameTable(
                 name: "Author",
-                newName: "Author_1");
+                newName: "Author");
 
             migrationBuilder.AddPrimaryKey(
                 name: "PK_Author_1",
-                table: "Author_1",
+                table: "Author",
                 column: "ID");
 
             migrationBuilder.AddForeignKey(
                 name: "FK_Book_Author_1_AuthorID",
                 table: "Book",
                 column: "AuthorID",
-                principalTable: "Author_1",
+                principalTable: "Author",
                 principalColumn: "ID",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -42,10 +42,10 @@ namespace MoldovanIoana_Lab2.Migrations
 
             migrationBuilder.DropPrimaryKey(
                 name: "PK_Author_1",
-                table: "Author_1");
+                table: "Author");
 
             migrationBuilder.RenameTable(
-                name: "Author_1",
+                name: "Author",
                 newName: "Author");
 
             migrationBuilder.AddPrimaryKey(

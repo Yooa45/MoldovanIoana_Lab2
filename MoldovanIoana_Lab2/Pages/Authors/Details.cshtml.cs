@@ -23,12 +23,12 @@ namespace MoldovanIoana_Lab2.Pages.Authors
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Author_1 == null)
+            if (id == null || _context.Author == null)
             {
                 return NotFound();
             }
 
-            var author = await _context.Author_1.FirstOrDefaultAsync(m => m.ID == id);
+            var author = await _context.Author.FirstOrDefaultAsync(m => m.ID == id);
             if (author == null)
             {
                 return NotFound();

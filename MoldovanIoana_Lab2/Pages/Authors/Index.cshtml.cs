@@ -23,9 +23,9 @@ namespace MoldovanIoana_Lab2.Pages.Authors
 
         public async Task OnGetAsync()
         {
-            if (_context.Author_1 != null)
+            if (_context.Author != null)
             {
-                Author = await _context.Author_1.ToListAsync();
+                Author = await _context.Author.ToListAsync();
             }
         }
     }

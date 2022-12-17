@@ -22,7 +22,7 @@ namespace MoldovanIoana_Lab2.Models
         public Publisher? Publisher { get; set; }
         public int? AuthorID { get; set; }
         public Author? Author { get; set; }
-        [RegularExpression(@"^[A-Z][a-z]+\s[A-Z][a-z]+$", ErrorMessage = "Numele autorului trebuie sa fie de forma 'Prenume Nume' "), Required, StringLength(50, MinimumLength = 3)]
+       // [RegularExpression(@"^[A-Z][a-z]+\s[A-Z][a-z]+$", ErrorMessage = "Numele autorului trebuie sa fie de forma 'Prenume Nume' "), Required, StringLength(50, MinimumLength = 3)]
         //^ marcheaza inceputul sirului de caractere 
         //[A-Z][a-z]+ prenumele -litera mare urmata de oricate litere mici
         //\s spatiu

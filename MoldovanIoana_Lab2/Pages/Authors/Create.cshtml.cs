@@ -36,7 +36,7 @@ namespace MoldovanIoana_Lab2.Pages.Authors
                 return Page();
             }
 
-            _context.Author_1.Add(Author);
+            _context.Author.Add(Author);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

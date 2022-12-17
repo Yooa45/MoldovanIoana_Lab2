@@ -6,7 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using MoldovanIoana_Lab2.Data;
+using MoldovanIoana_Lab2.Migrations;
 using MoldovanIoana_Lab2.Models;
+using MoldovanIoana_Lab2.Models.ViewModels;
+using CategoryIndexData = MoldovanIoana_Lab2.Models.ViewModels.CategoryIndexData;
 
 namespace MoldovanIoana_Lab2.Pages.Categories
 {
@@ -20,9 +23,25 @@ namespace MoldovanIoana_Lab2.Pages.Categories
         }
 
         public IList<Category> Category { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public CategoryIndexData CategoryData { get; set; }
+        public int CategoryID { get; set; }
+        public int BookID { get; set; }
+        public async Task OnGetAsync(int? id, int? bookID)
         {
+            CategoryData = new CategoryIndexData();
+            CategoryData.Categories = await _context.Category
+            .Include(i => i.BookCategories)
+             .ThenInclude(i => i.Book)
+            .ThenInclude(i => i.Author)
+            .OrderBy(i => i.CategoryName)
+            .ToListAsync();
+            if (id != null)
+            {
+                CategoryID = id.Value;
+                Category Category = CategoryData.Categories.Where(i => i.ID == id.Value).Single();
+                CategoryData.BookCategories = Category.BookCategories;
+            }
+
             if (_context.Category != null)
             {
                 Category = await _context.Category.ToListAsync();

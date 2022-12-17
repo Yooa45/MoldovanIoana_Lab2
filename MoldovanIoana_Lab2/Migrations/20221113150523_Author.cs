@@ -4,7 +4,7 @@
 
 namespace MoldovanIoana_Lab2.Migrations
 {
-    public partial class Author : Migration
+    public partial class Author_1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
